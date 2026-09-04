@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hotel Modak Pure Veg Restaurant</title>
+    
+    <style>
+        /* Modern Foodie Theme - Warm Amber & Green (Pure Veg Special) */
+        :root {
+            --bg-primary: #FAF6F0;
+            --bg-card: #FFFFFF;
+            --text-main: #2D2D2D;
+            --text-muted: #666666;
+            --accent-color: #2E7D32; /* Pure Veg Green */
+            --accent-gold: #E65100; /* Warm Orange/Red */
+            --border-color: #E0E0E0;
+            --shadow: 0 4px 12px rgba(0,0,0,0.08);
+            --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        /* Dark Mode Theme */
+        body.dark-mode {
+            --bg-primary: #121212;
+            --bg-card: #1E1E1E;
+            --text-main: #F5F5F5;
+            --text-muted: #B0B0B0;
+            --border-color: #333333;
+            --shadow: 0 4px 15px rgba(0,0,0,0.4);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-primary);
+            color: var(--text-main);
+            transition: var(--transition);
+            line-height: 1.5;
+            padding-bottom: 3rem;
+        }
+
+        /* Header */
+        header {
+            background-color: var(--bg-card);
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            padding: 1rem 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .brand-container {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .veg-symbol {
+            width: 18px;
+            height: 18px;
+            border: 2px solid #2E7D32;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2px;
+        }
+
+        .veg-dot {
+            width: 10px;
+            height: 10px;
+            background-color: #2E7D32;
+            border-radius: 50%;
+        }
+
+        .logo {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--accent-gold);
+        }
+
+        .header-controls {
+            display: flex;
+            gap: 8px;
+        }
+
+        .control-btn {
+            background: none;
+            border: 1px solid var(--accent-color);
+            color: var(--accent-color);
+            padding: 0.35rem 0.75rem;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.85rem;
+            transition: var(--transition);
+        }
+
+        .control-btn:hover {
+            background-color: var(--accent-color);
+            color: #FFF;
+        }
+
+        /* Hero Banner */
+        .hero {
+            text-align: center;
+            padding: 2rem 1rem 1rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 2.2rem;
+            color: var(--accent-gold);
+            margin-bottom: 0.3rem;
+        }
+
+        .hero p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        /* Search Bar */
+        .search-container {
+            max-width: 600px;
+            margin: 1.5rem auto 1rem;
+            padding: 0 1rem;
+            position: relative;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 0.8rem 1.2rem;
+            border-radius: 25px;
+            border: 1px solid var(--border-color);
+            background-color: var(--bg-card);
+            color: var(--text-main);
+            font-size: 1rem;
+            box-shadow: var(--shadow);
+            outline: none;
+            transition: var(--transition);
+        }
+
+        .search-input:focus {
+            border-color: var(--accent-gold);
+        }
+
+        /* Sticky Category Navigation Bar */
+        .nav-categories {
+            position: sticky;
+            top: 65px;
+            background-color: var(--bg-primary);
+            z-index: 900;
+            padding: 0.8rem 0;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.03);
+        }
+
+        .cat-btn {
+            background-color: var(--bg-card);
+            color: var(--text-main);
+            border: 1px solid var(--border-color);
+            padding: 0.5rem 1.2rem;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .cat-btn:hover, .cat-btn.active {
+            background-color: var(--accent-gold);
+            color: #FFFFFF;
+            border-color: var(--accent-gold);
+        }
+
+        /* Main Menu Content */
+        .menu-wrapper {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 1rem 1rem;
+        }
+
+        .section-title {
+            font-size: 1.6rem;
+            margin: 2rem 0 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--accent-gold);
+            color: var(--text-main);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .menu-card {
+            background-color: var(--bg-card);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border-color);
+            transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .menu-card:hover {
+            transform: translateY(-4px);
+        }
+
+        .menu-card img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+        }
+
+        .card-body {
+            padding: 1rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            flex-grow: 1;
+        }
+
+        .item-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 0.5rem;
+        }
+
+        .item-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+
+        .item-price {
+            color: var(--accent-color);
+            font-weight: 700;
+            font-size: 1.1rem;
+            white-space: nowrap;
+        }
+
+        .badge-veg {
+            font-size: 0.75rem;
+            color: var(--accent-color);
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 2rem;
+            margin-top: 3rem;
+            border-top: 1px solid var(--border-color);
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .no-results {
+            text-align: center;
+            padding: 3rem;
+            color: var(--text-muted);
+            font-size: 1.2rem;
+            display: none;
+        }
+
+        /* Mobile Adjustments */
+        @media (max-width: 600px) {
+            header { padding: 0.8rem 1rem; }
+            .logo { font-size: 1.1rem; }
+            .hero h1 { font-size: 1.6rem; }
+            .nav-categories { top: 58px; gap: 5px; }
+            .cat-btn { padding: 0.4rem 0.8rem; font-size: 0.8rem; }
+            .menu-grid { grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 1rem; }
+            .menu-card img { height: 150px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <div class="brand-container">
+            <div class="veg-symbol"><div class="veg-dot"></div></div>
+            <div class="logo">Hotel Modak</div>
+        </div>
+        <div class="header-controls">
+            <button class="control-btn" id="langToggle">हिंदी</button>
+            <button class="control-btn" id="themeToggle">Dark</button>
+        </div>
+    </header>
+
+    <!-- Hero Banner -->
+    <section class="hero">
+        <h1 id="heroTitle">Hotel Modak Pure Veg Restaurant</h1>
+        <p id="heroSub">Delicious & Authentic Pure Vegetarian Delights</p>
+    </section>
+
+    <!-- Live Search -->
+    <div class="search-container">
+        <input type="text" id="searchInput" class="search-input" placeholder="Search dish (e.g. Paneer, Dal, Papad)...">
+    </div>
+
+    <!-- Category Jump Buttons -->
+    <nav class="nav-categories">
+        <a href="#starters" class="cat-btn" id="catStarters">Starters</a>
+        <a href="#sabzi" class="cat-btn" id="catSabzi">Veg Sabzi Khazana</a>
+        <a href="#dal" class="cat-btn" id="catDal">Dal</a>
+    </nav>
+
+    <!-- Menu Items -->
+    <main class="menu-wrapper">
+        <div class="no-results" id="noResults">No dishes found matching your search.</div>
+
+        <!-- Starters Section -->
+        <section id="starters">
+            <h2 class="section-title" id="titleStarters">Starters</h2>
+            <div class="menu-grid" id="startersGrid"></div>
+        </section>
+
+        <!-- Veg Sabzi Khazana Section -->
+        <section id="sabzi">
+            <h2 class="section-title" id="titleSabzi">Veg Sabzi Khazana</h2>
+            <div class="menu-grid" id="sabziGrid"></div>
+        </section>
+
+        <!-- Dal Section -->
+        <section id="dal">
+            <h2 class="section-title" id="titleDal">Dal</h2>
+            <div class="menu-grid" id="dalGrid"></div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Hotel Modak Pure Veg Restaurant. All Rights Reserved.</p>
+    </footer>
+
+    <!-- JavaScript Logic -->
+    <script>
+        // Menu Dataset with English & Hindi Translations + Unsplash Images
+        const menuData = {
+            starters: [
+                { id: "s1", enName: "Masala Papad", hiName: "मसाला पापड़", price: 40, img: "images/img-masala-papad.jpg" },
+                { id: "s2", enName: "Chana Chaat", hiName: "चना चाट", price: 50, img: "images/img-chana-chaat.jpg" },
+                { id: "s3", enName: "Pani Puri", hiName: "पानी पूरी", price: 30, img: "images/img-pani-puri.jpg" },
+                { id: "s4", enName: "Dahi Papdi Chaat (Jumbo)", hiName: "दही पापड़ी चाट (जंबो)", price: 80, img: "images/img-papdi-chaat.jpg" }
+            ],
+            sabzi: [
+                { id: "v1", enName: "Veg Hungama", hiName: "वेज हंगामा", price: 100, img: "images/img-veg-hungama.jpg" },
+                { id: "v2", enName: "Veg Kolhapuri", hiName: "वेज कोल्हापुरी", price: 90, img: "images/img-veg-kolhapuri.jpg" },
+                { id: "v3", enName: "Veg Kadai", hiName: "वेज कड़ाई", price: 90, img: "images/img-veg-kadai.jpg" },
+                { id: "v4", enName: "Mix Veg Curry", hiName: "मिक्स वेज करी", price: 90, img: "images/img-mix-veg-curry.jpg" },
+                { id: "v5", enName: "Veg Lasooni", hiName: "वेज लसूनी", price: 100, img: "images/img-veg-lasooni.png" },
+                { id: "v6", enName: "Navaratna Korma", hiName: "नवरत्न कोरमा", price: 120, img: "images/img-navaratan-korma.jpg" },
+                { id: "v7", enName: "Aloo Methi", hiName: "आलू मेथी", price: 90, img: "images/img-aloo-methi.jpg" },
+                { id: "v8", enName: "Aloo Schezwan", hiName: "आलू शेजवान", price: 100, img: "images/img-aloo-schezwan.jpg" },
+                { id: "v9", enName: "Chana Peshawari", hiName: "चना पेशावरी", price: 80, img: "images/img-chana-peshawari.jpg" },
+                { id: "v10", enName: "Kaju Curry", hiName: "काजू करी", price: 110, img: "images/img-kaju-curry.jpg" },
+                { id: "v11", enName: "Cheese Butter Masala", hiName: "चीज बटर मसाला", price: 140, img: "images/img-cheese-butter-masala.jpg" },
+                { id: "v12", enName: "Mushroom Masala", hiName: "मशरूम मसाला", price: 110, img: "images/img-mushroom-masala.jpg" },
+                { id: "v13", enName: "Lasuni Palak", hiName: "लसुनी पालक", price: 100, img: "images/img-lasooni-palak.jpg" },
+                { id: "v14", enName: "Plain Palak", hiName: "प्लेन पालक", price: 80, img: "images/img-plain-palak.jpg" },
+                { id: "v15", enName: "Dum Aloo", hiName: "दम आलू", price: 80, img: "images/img-dum-aloo.jpg" },
+                { id: "v16", enName: "French Rivoli", hiName: "फ्रेंच रिवोली", price: 150, img: "images/img-french-rivoli.png" }
+            ],
+            dal: [
+                { id: "d1", enName: "Dal Makhani", hiName: "दाल मखनी", price: 90, img: "images/img-dal-makhani.jpg" },
+                { id: "d2", enName: "Dal Fry", hiName: "दाल फ्राई", price: 80, img: "images/img-dal-fry.jpg" },
+                { id: "d3", enName: "Dal Tadka", hiName: "दाल तड़का", price: 80, img: "images/img-dal-tadka.jpg" },
+                { id: "d4", enName: "Jira Dal", hiName: "जीरा दाल", price: 80, img: "images/img-jeera-dal.jpg" },
+                { id: "d5", enName: "Dal Kolhapuri", hiName: "दाल कोल्हापुरी", price: 90, img: "images/img-dal-kolhapuri.jpg" },
+                { id: "d6", enName: "Butter Dal", hiName: "बटर दाल", price: 80, img: "images/img-butter-dal.jpg" }
+            ]
+        };
+
+        let currentLang = 'en';
+
+        // DOM Elements
+        const themeToggle = document.getElementById('themeToggle');
+        const langToggle = document.getElementById('langToggle');
+        const searchInput = document.getElementById('searchInput');
+        const noResults = document.getElementById('noResults');
+
+        // Render Cards dynamically
+        function renderSection(items, containerId) {
+            const container = document.getElementById(containerId);
+            container.innerHTML = items.map(item => `
+                <article class="menu-card" data-en="${item.enName.toLowerCase()}" data-hi="${item.hiName}">
+                    <img src="${item.img}" alt="${item.enName}" loading="lazy">
+                    <div class="card-body">
+                        <div class="item-info">
+                            <h3 class="item-title">${currentLang === 'en' ? item.enName : item.hiName}</h3>
+                            <span class="item-price">₹${item.price}</span>
+                        </div>
+                        <div class="badge-veg">
+                            <div class="veg-symbol" style="width:12px;height:12px;"><div class="veg-dot" style="width:6px;height:6px;"></div></div>
+                            Pure Veg
+                        </div>
+                    </div>
+                </article>
+            `).join('');
+        }
+
+        function renderAllMenu() {
+            renderSection(menuData.starters, 'startersGrid');
+            renderSection(menuData.sabzi, 'sabziGrid');
+            renderSection(menuData.dal, 'dalGrid');
+        }
+
+        // Search Filter
+        searchInput.addEventListener('input', (e) => {
+            const query = e.target.value.toLowerCase().trim();
+            const cards = document.querySelectorAll('.menu-card');
+            let hasResults = false;
+
+            cards.forEach(card => {
+                const enText = card.getAttribute('data-en');
+                const hiText = card.getAttribute('data-hi');
+
+                if (enText.includes(query) || hiText.includes(query)) {
+                    card.style.display = 'flex';
+                    hasResults = true;
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+
+            // Hide Section headers if no items visible in that section
+            ['starters', 'sabzi', 'dal'].forEach(sec => {
+                const sectionEl = document.getElementById(sec);
+                const visibleCards = sectionEl.querySelectorAll('.menu-card[style="display: flex;"]');
+                if(query !== "" && visibleCards.length === 0) {
+                    sectionEl.style.display = 'none';
+                } else {
+                    sectionEl.style.display = 'block';
+                }
+            });
+
+            noResults.style.display = hasResults || query === "" ? 'none' : 'block';
+        });
+
+        // Toggle Language (English <-> Hindi)
+        langToggle.addEventListener('click', () => {
+            currentLang = currentLang === 'en' ? 'hi' : 'en';
+            langToggle.textContent = currentLang === 'en' ? 'हिंदी' : 'English';
+            
+            // Translate UI elements
+            document.getElementById('heroTitle').textContent = currentLang === 'en' ? 'Hotel Modak Pure Veg Restaurant' : 'होटल मोदक प्योर वेज रेस्टोरेंट';
+            document.getElementById('heroSub').textContent = currentLang === 'en' ? 'Delicious & Authentic Pure Vegetarian Delights' : 'स्वादिष्ट और शुद्ध शाकाहारी भोजन';
+            document.getElementById('searchInput').placeholder = currentLang === 'en' ? 'Search dish (e.g. Paneer, Dal, Papad)...' : 'डिश खोजें (जैसे पनीर, दाल, पापड़)...';
+            
+            document.getElementById('catStarters').textContent = currentLang === 'en' ? 'Starters' : 'स्टार्टर्स';
+            document.getElementById('catSabzi').textContent = currentLang === 'en' ? 'Veg Sabzi Khazana' : 'वेज सब्जी खजाना';
+            document.getElementById('catDal').textContent = currentLang === 'en' ? 'Dal Section' : 'दाल सेक्शन';
+
+            document.getElementById('titleStarters').textContent = currentLang === 'en' ? 'Starters' : 'स्टार्टर्स';
+            document.getElementById('titleSabzi').textContent = currentLang === 'en' ? 'Veg Sabzi Khazana' : 'वेज सब्जी खजाना';
+            document.getElementById('titleDal').textContent = currentLang === 'en' ? 'Dal Section' : 'दाल सेक्शन';
+
+            // Re-render items in chosen language
+            renderAllMenu();
+        });
+
+        // Theme Toggle (Dark Mode)
+        themeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+            const isDark = document.body.classList.contains('dark-mode');
+            themeToggle.textContent = isDark ? 'Light' : 'Dark';
+        });
+
+        // Initial Load
+        renderAllMenu();
+    </script>
+</body>
+</html>
